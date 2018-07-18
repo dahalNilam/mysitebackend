@@ -1,32 +1,49 @@
 ﻿namespace Backend.Controllers
 {
+    using Backend.Accessors;
     using Backend.Modals;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
-    using System.Linq;
 
     [Route("api/[controller]")]
     [ApiController]
     public class HousingController : ControllerBase
     {
-        public HousingController(ApplicationDbContext context)
+        [HttpPost]
+        public ActionResult<Housing> Add([FromBody]Housing housing)
         {
-            _context = context;
+            return new HousingAccessor(_context).Add(housing);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Housing> GetById(int id)
+        {
+            return new HousingAccessor(_context).GetById(id);
         }
 
         [HttpGet]
-        public ActionResult<List<Housing>> GetAll()
+        public ActionResult<IEnumerable<Housing>> GetAll()
         {
-            _context.Housing.Add(new Housing()
-            {
-                Id = 5,
-                Price = 90,
-            });
-            _context.SaveChanges();
+            return Ok(new HousingAccessor(_context).GetAll());
+        }
 
-            var data = _context.Housing.ToList();
+        [HttpPut("{id}")]
+        public ActionResult<Housing> Update(int id, [FromBody]Housing housing)
+        {
+            return Ok(new HousingAccessor(_context).Update(id, housing));
+        }
 
-            return Ok(data);
+        [HttpDelete]
+        public ActionResult Remove([FromBody]int id)
+        {
+            new HousingAccessor(_context).Remove(id);
+
+            return Ok();
+        }
+
+        public HousingController(ApplicationDbContext context)
+        {
+            _context = context;
         }
 
         private readonly ApplicationDbContext _context;

@@ -1,6 +1,6 @@
 ﻿namespace Backend.Modals.enums
 {
-    public enum PropertyType
+    public enum HousingType
     {
         Studio = 1,
         Apartment = 2,
