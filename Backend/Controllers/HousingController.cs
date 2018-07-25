@@ -9,6 +9,12 @@
     [ApiController]
     public class HousingController : ControllerBase
     {
+        [HttpGet]
+        public ActionResult<IEnumerable<Housing>> GetAll()
+        {
+            return Ok(new HousingAccessor(_context).GetAll());
+        }
+
         [HttpPost]
         public ActionResult<Housing> Add([FromBody]Housing housing)
         {
@@ -19,12 +25,6 @@
         public ActionResult<Housing> GetById(int id)
         {
             return new HousingAccessor(_context).GetById(id);
-        }
-
-        [HttpGet]
-        public ActionResult<IEnumerable<Housing>> GetAll()
-        {
-            return Ok(new HousingAccessor(_context).GetAll());
         }
 
         [HttpPut("{id}")]
