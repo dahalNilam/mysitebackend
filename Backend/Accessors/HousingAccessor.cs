@@ -2,6 +2,7 @@
 {
     using Backend.Accessors.Interfaces;
     using Backend.Modals;
+    using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -22,7 +23,7 @@
 
         public IEnumerable<Housing> GetAll()
         {
-            return _context.Housing.ToList();
+            return _context.Housing.Include(r => r.Images).ToList();
         }
 
         public Housing Update(int id, Housing housing)

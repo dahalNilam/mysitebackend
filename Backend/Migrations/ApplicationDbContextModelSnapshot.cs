@@ -37,6 +37,32 @@ namespace Backend.Migrations
 
                     b.ToTable("Housing");
                 });
+
+            modelBuilder.Entity("Backend.Modals.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FileName");
+
+                    b.Property<int>("HousingId");
+
+                    b.Property<string>("Path");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HousingId");
+
+                    b.ToTable("Image");
+                });
+
+            modelBuilder.Entity("Backend.Modals.Image", b =>
+                {
+                    b.HasOne("Backend.Modals.Housing", "Housing")
+                        .WithMany("Images")
+                        .HasForeignKey("HousingId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 #pragma warning restore 612, 618
         }
     }

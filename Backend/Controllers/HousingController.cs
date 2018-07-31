@@ -12,7 +12,9 @@
         [HttpGet]
         public ActionResult<IEnumerable<Housing>> GetAll()
         {
-            return Ok(new HousingAccessor(_context).GetAll());
+            var all = new HousingAccessor(_context).GetAll();
+
+            return Ok(all);
         }
 
         [HttpPost]

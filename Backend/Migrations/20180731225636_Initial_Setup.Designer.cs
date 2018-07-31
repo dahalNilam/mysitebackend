@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180718174717_UpdateHousingModal")]
-    partial class UpdateHousingModal
+    [Migration("20180731225636_Initial_Setup")]
+    partial class Initial_Setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,32 @@ namespace Backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Housing");
+                });
+
+            modelBuilder.Entity("Backend.Modals.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FileName");
+
+                    b.Property<int>("HousingId");
+
+                    b.Property<string>("Path");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HousingId");
+
+                    b.ToTable("Image");
+                });
+
+            modelBuilder.Entity("Backend.Modals.Image", b =>
+                {
+                    b.HasOne("Backend.Modals.Housing", "Housing")
+                        .WithMany("Images")
+                        .HasForeignKey("HousingId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

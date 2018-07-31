@@ -1,12 +1,10 @@
 ﻿namespace Backend.Modals
 {
     using Backend.Modals.enums;
-    using Newtonsoft.Json;
-    using System.ComponentModel.DataAnnotations;
+    using System.Collections.Generic;
 
     public class Housing
     {
-        [Key]
         public int Id { get; set; }
 
         public double Price { get; set; }
@@ -18,5 +16,7 @@
         public double NumberOfBathroom { get; set; }
 
         public string Description { get; set; }
+
+        public ICollection<Image> Images { get; set; }
     }
 }
