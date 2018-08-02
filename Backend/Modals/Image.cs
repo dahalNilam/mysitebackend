@@ -1,8 +1,6 @@
 ﻿namespace Backend.Modals
 {
     using Newtonsoft.Json;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Image
     {
