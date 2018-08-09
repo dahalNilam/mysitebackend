@@ -5,6 +5,7 @@
     using Backend.Modals;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
+    using System.Linq;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -19,13 +20,22 @@
         }
 
         [HttpPost]
-        public ActionResult<Image> Add([FromBody]Image image)
+        public ActionResult<string> Upload()
         {
-            return new ImageAccessor(_context).Add(image);
+            var requestFiles = Request.Form.Files;
+
+            if (requestFiles.Count < 1)
+            {
+                return null;
+            }
+
+            ImageBL.Upload(requestFiles.FirstOrDefault());
+
+            return Ok();
         }
 
         [HttpGet("{id}")]
-        public ActionResult GetBtId(int id)
+        public ActionResult GetById(int id)
         {
             var image = new ImageAccessor(_context).GetById(id);
 
@@ -35,7 +45,7 @@
         [HttpPut("{id}")]
         public ActionResult<Image> Update(int id, [FromBody]Image image)
         {
-            return Ok(new ImageAccessor(_context).Update(id, image));
+            return new ImageAccessor(_context).Update(id, image);
         }
 
         [HttpDelete]

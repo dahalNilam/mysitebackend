@@ -2,9 +2,9 @@
 {
     public enum HousingType
     {
-        Studio = 1,
-        Apartment = 2,
-        Condo = 3,
-        House = 4,
+        Studio = 0,
+        Apartment = 1,
+        Condo = 2,
+        House = 3,
     }
 }

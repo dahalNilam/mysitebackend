@@ -12,13 +12,12 @@
         [HttpGet]
         public ActionResult<IEnumerable<Housing>> GetAll()
         {
-            var all = new HousingAccessor(_context).GetAll();
 
-            return Ok(all);
+            return Ok(new HousingAccessor(_context).GetAll());
         }
 
         [HttpPost]
-        public ActionResult<Housing> Add([FromBody]Housing housing)
+        public ActionResult<Housing> Add([FromBody] Housing housing)
         {
             return new HousingAccessor(_context).Add(housing);
         }
