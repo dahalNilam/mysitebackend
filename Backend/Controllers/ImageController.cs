@@ -29,7 +29,14 @@
                 return null;
             }
 
-            ImageBL.Upload(requestFiles.FirstOrDefault());
+            var imageFile = requestFiles.FirstOrDefault();
+
+            if (imageFile.Length < 1)
+            {
+                return null;
+            }
+
+            ImageBL.Upload(imageFile);
 
             return Ok();
         }

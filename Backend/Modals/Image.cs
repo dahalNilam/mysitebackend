@@ -8,7 +8,7 @@
 
         public string FileName { get; set; }
 
-        public string Path { get; set; }
+        public string Path { get; set; } = @"E:\Projects\MySite\Images\";
 
         public int HousingId { get; set; }
 
