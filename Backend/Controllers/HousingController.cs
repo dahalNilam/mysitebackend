@@ -2,6 +2,7 @@
 {
     using Backend.Accessors;
     using Backend.Modals;
+    using Backend.Modals.TransientModals;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
 
@@ -17,8 +18,18 @@
         }
 
         [HttpPost]
-        public ActionResult<Housing> Add([FromBody] Housing housing)
+        public ActionResult<Housing> Add([FromBody] HousingTM housingTM)
         {
+            var housing = new Housing()
+            {
+                Type = housingTM.Type,
+                Description = housingTM.Description,
+                Images = housingTM.Images,
+                NumberOfBathroom = housingTM.NumberOfBathroom,
+                NumberOfBedroom = housingTM.NumberOfBedroom,
+                Price = housingTM.Price,
+            };
+
             return new HousingAccessor(_context).Add(housing);
         }
 
