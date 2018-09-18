@@ -9,6 +9,8 @@
 
         Image GetById(int id);
 
+        Image GetByHash(string hash);
+
         IEnumerable<Image> GetAll();
 
         Image Update(int id, Image image);

@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180731225636_Initial_Setup")]
-    partial class Initial_Setup
+    [Migration("20180918022457_Initial_Migration")]
+    partial class Initial_Migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,8 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("FileName");
+
+                    b.Property<string>("Hash");
 
                     b.Property<int>("HousingId");
 

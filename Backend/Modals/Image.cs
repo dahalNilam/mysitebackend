@@ -11,6 +11,7 @@
         public string Path { get; set; } = @"E:\Projects\MySite\Images\";
 
         public int HousingId { get; set; }
+        public string Hash { get; set; }
 
         [JsonIgnore]
         public Housing Housing { get; set; }

@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Backend.Migrations
 {
-    public partial class Initial_Setup : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,7 +32,8 @@ namespace Backend.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     FileName = table.Column<string>(nullable: true),
                     Path = table.Column<string>(nullable: true),
-                    HousingId = table.Column<int>(nullable: false)
+                    HousingId = table.Column<int>(nullable: false),
+                    Hash = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

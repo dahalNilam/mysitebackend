@@ -28,13 +28,7 @@
 
         public Housing Update(int id, Housing housing)
         {
-            var itemToUpdate = _context.Housing.Find(id);
-
-            itemToUpdate.Price = housing.Price;
-            itemToUpdate.Type = housing.Type;
-            itemToUpdate.NumberOfBedroom = housing.NumberOfBedroom;
-            itemToUpdate.NumberOfBathroom = housing.NumberOfBathroom;
-            itemToUpdate.Description = housing.Description;
+            _context.Housing.Update(housing);
 
             _context.SaveChanges();
 

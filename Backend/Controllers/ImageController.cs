@@ -3,6 +3,7 @@
     using Backend.Accessors;
     using Backend.BusinessLogic;
     using Backend.Modals;
+    using Backend.Utilities;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Linq;
@@ -20,7 +21,7 @@
         }
 
         [HttpPost]
-        public ActionResult<string> Upload()
+        public ActionResult<Image> Upload()
         {
             var requestFiles = Request.Form.Files;
 
@@ -36,9 +37,26 @@
                 return null;
             }
 
-            ImageBL.Upload(imageFile);
+            var filePath = ImageBL.GetFilePath(imageFile.FileName);
 
-            return Ok();
+            var hash = ImageUtils.GetHash(filePath);
+
+            var imageAccessor = new ImageAccessor(_context);
+            var image = imageAccessor.GetByHash(hash);
+
+            if (image == null)
+            {
+                ImageBL.Upload(imageFile, filePath);
+
+                image = new Image()
+                {
+                    FileName = imageFile.FileName,
+                    Hash = hash,
+                    Path = filePath,
+                };
+            }
+
+            return Ok(image);
         }
 
         [HttpGet("{id}")]

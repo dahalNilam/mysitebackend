@@ -1,6 +1,7 @@
 ﻿namespace Backend.BusinessLogic
 {
     using Backend.Modals;
+    using Backend.Utilities;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System.IO;
@@ -21,11 +22,14 @@
             return new FileStreamResult(new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite), mimeType);
         }
 
-        public static async void Upload(IFormFile file)
+        public static string GetFilePath(string fileName)
         {
-            var filePath = Path.Combine(BasePath, file.FileName);
+            return Path.Combine(BasePath, fileName);
+        }
 
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
+        public static async void Upload(IFormFile file, string filePath)
+        {
+            using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
             {
                 await file.CopyToAsync(fileStream);
             }

@@ -20,6 +20,11 @@
             return _context.Image.Find(id);
         }
 
+        public Image GetByHash(string hash)
+        {
+            return _context.Image.FirstOrDefault(p => p.Hash == hash);
+        }
+
         public IEnumerable<Image> GetAll()
         {
             return _context.Image.ToList();
@@ -32,7 +37,7 @@
             itemToUpdate.FileName = image.FileName;
             itemToUpdate.Housing = image.Housing;
             itemToUpdate.HousingId = image.HousingId;
-            itemToUpdate.Path= image.Path;
+            itemToUpdate.Path = image.Path;
 
             _context.SaveChanges();
 
