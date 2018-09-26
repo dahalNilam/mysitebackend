@@ -1,9 +1,11 @@
 ﻿namespace Backend.Modals
 {
     using Newtonsoft.Json;
+    using System.ComponentModel.DataAnnotations;
 
     public class Image
     {
+        [Key]
         public int Id { get; set; }
 
         public string FileName { get; set; }

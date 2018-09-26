@@ -27,11 +27,11 @@
             return Path.Combine(BasePath, fileName);
         }
 
-        public static async void Upload(IFormFile file, string filePath)
+        public static void Upload(IFormFile file, string filePath)
         {
             using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
             {
-                await file.CopyToAsync(fileStream);
+                file.CopyTo(fileStream);
             }
         }
     }

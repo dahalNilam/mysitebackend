@@ -38,7 +38,7 @@
             }
 
             var filePath = ImageBL.GetFilePath(imageFile.FileName);
-
+            ImageBL.Upload(imageFile, filePath);
             var hash = ImageUtils.GetHash(filePath);
 
             var imageAccessor = new ImageAccessor(_context);
@@ -46,8 +46,6 @@
 
             if (image == null)
             {
-                ImageBL.Upload(imageFile, filePath);
-
                 image = new Image()
                 {
                     FileName = imageFile.FileName,
